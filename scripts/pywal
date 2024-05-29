@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Check if the input argument is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <image-path>"
+  exit 1
+fi
+
+# Get the image path from the first argument
+IMAGE_PATH=$1
+
+# Execute the command with the input image path
+swww img "$IMAGE_PATH" -t wipe --transition-angle 45 --transition-duration 0.5 --transition-fps 120 && wal -i "$IMAGE_PATH"
+
+cp .cache/wal/warp-theme.yml ${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes/pywal.yml
+
+~/scripts/kdeglobals-theme-generator.sh
