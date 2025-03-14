@@ -1,17 +1,29 @@
 #!/bin/bash
 
 # Check if the input argument is provided
-if [ -z "$1" ]; then
-  echo "Usage: $0 <image-path>"
+
+
+IMAGE_PATH=$(yad --width 1200 --height 800 --file --add-preview --large-preview --title='Choose wallpaper' --workdir="$HOME/Wallpapers")
+
+if [ -z "$IMAGE_PATH" ]; then
+  echo -e "No image file selected\n aborting..."
   exit 1
 fi
 
+echo $IMAGE_PATH > ~/.pwall/pwall.txt
 # Get the image path from the first argument
-IMAGE_PATH=$1
+
+echo "\"$IMAGE_PATH\"">~/.pwall/pwall.txt
 
 # Execute the command with the input image path
-swww img "$IMAGE_PATH" -t wipe --transition-angle 45 --transition-duration 0.5 --transition-fps 120 && wal -i "$IMAGE_PATH"
+echo $IMAGE_PATH
+swww img "$IMAGE_PATH" -t wipe --transition-angle 45 --transition-duration 0.5 --transition-fps 120 && wal -n  -i "$IMAGE_PATH"
 
-cp .cache/wal/warp-theme.yml ${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes/pywal.yml
+# cp ~/.cache/wal/zed-editor-wal-theme.json ~/.config/zed/themes
+# cp ~/.cache/wal/colors-konsole.colorscheme ~/.local/share/konsole/colors-konsole.colorscheme
+#
+cp ~/.cache/wal/warp-theme.yml ${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes/pywal.yml
+cat ~/.cache/wal/ghostty-pywal > ~/.config/ghostty/themes/pywal
 
 ~/scripts/kdeglobals-theme-generator.sh
+

@@ -104,7 +104,6 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-fastfetch
 
 # Custom Defined aliases
 
@@ -117,14 +116,75 @@ fastfetch
     alias lsa="ls -la"
     alias lla="ls -la"
 # pacman aliases
-    alias arch-update="sudo pacman -Syyu"
+    alias arch-update="sudo pacman -Syyu && paru -Su"
     alias arch-mirror-update="sudo pacman -Syy"
     alias arch-clear-pacman-cache="sudo pacman -Scc"
-    alias arch-clear-yay-cache="yay -Scc"
+    alias arch-clear-aur-cache="paru -Scc"
+
+# Scripts aliases
+    
+    alias pwal="~/scripts/pywal"
+    alias lwarp="~/scripts/launch_warp.sh"
+
+#zoxide alias
+	
+	alias cd='z'
 
 #other aliases
-    alias pwal="./scripts/pywal"
 
-LOCAL_IP=110.172.55.126
-TERMUX_HOME="/data/data/com.termux/files/home"
+    # alias fastfetch="fastfetch --logo-type kitty --logo-width 45 --logo $(cat ~/.pwall/pwall.txt)"
+    alias rfw="sudo systemctl reboot --firmware"
 
+#vim-nvim aliases
+
+    alias vi="vim"
+    alias vim="nvim"
+    alias _nvim="NVIM_APPNAME=adventnvim nvim"
+
+#evals
+
+	eval "$(dircolors ~/.dircolors)"
+	eval $(thefuck --alias)
+	eval "$(zoxide init zsh)"
+
+#variables
+
+	LOCAL_IP=110.172.55.126
+	TERMUX_HOME="/data/data/com.termux/files/home"
+
+#export variables
+
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+	export WARP_ENABLE_WAYLAND=1
+	export WGPU_BACKEND=gl
+	export QT_QPA_PLATFORM=wayland
+	export GDK_BACKEND=wayland
+	export GTK_IM_MODULE=ibus
+	export WGPU_BACKEND=gl
+	export PATH=$HOME/.local/bin:$PATH
+	export LD_LIBRARY_PARTH=:$LD_LIBRARY_PATH:home/shyamendrahazra/Workspace/ShyamendraHazra/projects/langs-specific/C/shared_libraries
+
+	export EDITOR='/usr/bin/nvim'
+	export VISUAL='/usr/bin/nvim'
+
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+#
+	__conda_setup="$('/home/shyamendrahazra/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+	if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+	else
+		if [ -f "/home/shyamendrahazra/miniconda3/etc/profile.d/conda.sh" ]; then
+			. "/home/shyamendrahazra/miniconda3/etc/profile.d/conda.sh"
+		else
+			export PATH="/home/shyamendrahazra/miniconda3/bin:$PATH"
+		fi
+	fi
+	unset __conda_setup
+
+# <<< conda initialize <<<
+
+~/scripts/pwallsh.sh
+conda deactivate
