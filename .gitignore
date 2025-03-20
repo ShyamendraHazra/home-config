@@ -1,4 +1,4 @@
 *
 !.zshrc
-!scripts/
-.oh-my-zsh/
+!/scripts/**
+!/scripts/
