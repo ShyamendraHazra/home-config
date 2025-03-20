@@ -187,4 +187,4 @@ source $ZSH/oh-my-zsh.sh
 # <<< conda initialize <<<
 
 ~/scripts/pwallsh.sh
-conda deactivate
+# conda deactivate
