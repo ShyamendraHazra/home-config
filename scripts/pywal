@@ -1,8 +1,10 @@
 #!/bin/bash
 
+
+CHECK_PROCESS_SCRIPT="$HOME/scripts/check_process_status.sh"
+WAYBAR_CONTROL="$HOME/scripts/launch_waybar.sh"
+
 # Check if the input argument is provided
-
-
 IMAGE_PATH=$(yad --width 1200 --height 800 --file --add-preview --large-preview --title='Choose wallpaper' --workdir="$HOME/Wallpapers")
 
 if [ -z "$IMAGE_PATH" ]; then
@@ -25,5 +27,10 @@ swww img "$IMAGE_PATH" -t wipe --transition-angle 45 --transition-duration 0.5 -
 cp ~/.cache/wal/warp-theme.yml ${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes/pywal.yml
 cat ~/.cache/wal/ghostty-pywal > ~/.config/ghostty/themes/pywal
 
+$WAYBAR_CONTROL
+
+cat ~/.cache/wal/colors-waybar.css > ~/.config/waybar/colors-waybar.css
+
+$WAYBAR_CONTROL
 ~/scripts/kdeglobals-theme-generator.sh
 
