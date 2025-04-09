@@ -16,6 +16,6 @@ if [ $STATUS -eq 0 ]; then
 
 else
   echo -e "Launching waybar\n"
-  waybar -c ~/.config/waybar/config.json  -s .config/waybar/style.css  &
+  waybar -c ~/.config/waybar/config.json  -s ~/.config/waybar/style.css  &
 fi
 

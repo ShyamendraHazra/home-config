@@ -1,0 +1,11 @@
+#!/bin/bash
+# Original path with spaces
+wall_path=$(cat ~/.pwall/pwall.txt)
+
+# Directly extract the terminal name from fastfetch output
+# Check if the terminal name is either "kitty" or "ghostty"
+if [[ "$TERM_PROGRAM" == "kitty" || "$TERM_PROGRAM" == "ghostty" ]]; then
+    fastfetch --logo-type kitty --logo-width 45 --logo "$wall_path"
+else
+    fastfetch 
+fi

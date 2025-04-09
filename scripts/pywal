@@ -1,8 +1,9 @@
 #!/bin/bash
 
-
 CHECK_PROCESS_SCRIPT="$HOME/scripts/check_process_status.sh"
 WAYBAR_CONTROL="$HOME/scripts/launch_waybar.sh"
+FORMAT_WALL_TO_PNG="$HOME/scripts/set_curr_Wallpaper.sh"
+
 
 # Check if the input argument is provided
 IMAGE_PATH=$(yad --width 1200 --height 800 --file --add-preview --large-preview --title='Choose wallpaper' --workdir="$HOME/Wallpapers")
@@ -18,7 +19,7 @@ echo $IMAGE_PATH > ~/.pwall/pwall.txt
 echo "\"$IMAGE_PATH\"">~/.pwall/pwall.txt
 
 # Execute the command with the input image path
-echo $IMAGE_PATH
+# echo $IMAGE_PATH
 swww img "$IMAGE_PATH" -t wipe --transition-angle 45 --transition-duration 0.5 --transition-fps 120 && wal -n  -i "$IMAGE_PATH"
 
 # cp ~/.cache/wal/zed-editor-wal-theme.json ~/.config/zed/themes
@@ -26,11 +27,19 @@ swww img "$IMAGE_PATH" -t wipe --transition-angle 45 --transition-duration 0.5 -
 #
 cp ~/.cache/wal/warp-theme.yml ${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes/pywal.yml
 cat ~/.cache/wal/ghostty-pywal > ~/.config/ghostty/themes/pywal
+~/scripts/kdeglobals-theme-generator.sh
+
+#update waybar section
 
 $WAYBAR_CONTROL
 
 cat ~/.cache/wal/colors-waybar.css > ~/.config/waybar/colors-waybar.css
 
 $WAYBAR_CONTROL
-~/scripts/kdeglobals-theme-generator.sh
 
+#update waybar section
+
+$FORMAT_WALL_TO_PNG
+
+# update hyprlock config
+~/scripts/update_hyprlock-conf.sh
