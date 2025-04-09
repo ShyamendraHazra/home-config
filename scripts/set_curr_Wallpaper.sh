@@ -9,3 +9,5 @@ IMAGE_PATH=$(cat ~/.pwall/pwall.txt)
 
 COMMAND="magick $IMAGE_PATH -background black -alpha remove -alpha off -depth 8 -strip ~/Pictures/wall.png"
 eval "$COMMAND"
+COMMAND="magick ~/Pictures/wall.png -blur 0x8 ~/Pictures/wall_blur.png"
+eval "$COMMAND"

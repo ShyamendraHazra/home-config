@@ -41,5 +41,3 @@ $WAYBAR_CONTROL
 
 $FORMAT_WALL_TO_PNG
 
-# update hyprlock config
-~/scripts/update_hyprlock-conf.sh
