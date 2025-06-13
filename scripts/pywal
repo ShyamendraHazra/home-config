@@ -28,7 +28,8 @@ swww img "$IMAGE_PATH" -t wipe --transition-angle 45 --transition-duration 0.5 -
 cp ~/.cache/wal/warp-theme.yml ${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes/pywal.yml
 cat ~/.cache/wal/ghostty-pywal > ~/.config/ghostty/themes/pywal
 ~/scripts/kdeglobals-theme-generator.sh
-
+cp ~/.cache/wal/wal-hul10.omp.toml ~/wal-hul10.omp.toml
+sed -i 's/{'\''{'\''}/{{/g; s/{'\''}'\''}/}}/g' ~/wal-hul10.omp.toml
 #update waybar section
 
 $WAYBAR_CONTROL

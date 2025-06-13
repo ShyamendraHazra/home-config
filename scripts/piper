@@ -1,0 +1,12 @@
+#!/bin/bash
+
+PIPER_BINARY=~/piper/build/piper
+PIPER_VOICE_DIR=~/piper/build/voices
+COMMAD_RUNNER="| $PIPER_BINARY --model $PIPER_VOICE_DIR/libritts/en_US-libritts-high.onnx --output-raw 2>> /dev/null| paplay --raw --rate=22050 --channels=1 --format=s16le"
+PAYLOAD="echo 'Boss... Write something here ... so I can repeat it out... loud '"
+eval $PAYLOAD$COMMAD_RUNNER
+
+
+read -p "Enter here :: " text
+
+eval echo "$text"$COMMAD_RUNNER
