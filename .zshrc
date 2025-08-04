@@ -74,8 +74,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git\
     zsh-autosuggestions\
     zsh-syntax-highlighting\
-    zsh-syntax-highlighting\
-    zsh-autocomplete)
+    )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,7 +107,6 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
 # Custom Defined aliases
 
     alias SSH-TERMUX="sshfs termux:/data/data/com.termux/files/home /datadrive/Shyamendra\ Hazra/Workspace/personal/workdir-android"
@@ -139,7 +137,7 @@ source $ZSH/oh-my-zsh.sh
 
     # alias fastfetch="fastfetch --logo-type kitty --logo-width 45 --logo $(cat ~/.pwall/pwall.txt)"
     alias rfw="sudo systemctl reboot --firmware"
-
+    alias stl="steamtinkerlaunch"
 #vim-nvim aliases
 
     alias vi="vim"
@@ -172,10 +170,6 @@ source $ZSH/oh-my-zsh.sh
 	export EDITOR='/usr/bin/nvim'
 	export VISUAL='/usr/bin/nvim'
 
-
-
-
-
 fash
 
 # >>> conda initialize >>>
@@ -193,3 +187,12 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+source /usr/share/nvm/init-nvm.sh
+
+# Initialize NVM (Node Version Manager)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+nvm use stable >> /dev/null
