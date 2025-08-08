@@ -135,9 +135,10 @@ source $ZSH/oh-my-zsh.sh
 
 #other aliases
 
-    # alias fastfetch="fastfetch --logo-type kitty --logo-width 45 --logo $(cat ~/.pwall/pwall.txt)"
     alias rfw="sudo systemctl reboot --firmware"
     alias stl="steamtinkerlaunch"
+    alias dhist='grep "^:" ~/.zsh_history | nl -w1 -s"  " | while read num _ rest; do epoch="${rest%%:*}"; cmd="${rest#*;}"; printf "%d  %s  %s\n" "$num" "$(date -d @"$epoch" "+%F %T")" "$cmd"; done'
+    alias plist='explicit=$(pacman -Qeq); grouped=$(pacman -Sgq); echo "=== Explicit packages (no group) ==="; comm -23 <(echo "$explicit" | sort) <(echo "$grouped" | sort); echo; echo "=== Explicit packages in groups ==="; comm -12 <(echo "$explicit" | sort) <(echo "$grouped" | sort) | while read -r pkg; do pacman -Qg "$pkg" | awk "{print \$1\": \"\$2}"; done | sort -u'
 #vim-nvim aliases
 
     alias vi="vim"
@@ -196,3 +197,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 nvm use stable >> /dev/null
+

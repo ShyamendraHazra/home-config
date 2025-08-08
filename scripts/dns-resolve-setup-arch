@@ -1,0 +1,20 @@
+echo "🔧 Enabling systemd-resolved..."
+sudo systemctl enable systemd-resolved --now
+
+echo "🔗 Ensuring /etc/resolv.conf exists and is a symlink..."
+sudo mkdir -p /etc
+sudo touch /etc/resolv.conf
+sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+echo "📁 Creating config directory for DNS override..."
+sudo mkdir -p /etc/systemd/resolved.conf.d
+
+echo "📝 Writing custom DNS config..."
+sudo tee /etc/systemd/resolved.conf.d/dns.conf > /dev/null <<EOF
+[Resolve]
+DNS=1.1.1.1 8.8.8.8
+FallbackDNS=9.9.9.9
+EOF
+
+echo "🔄 Restarting systemd-resolved..."
+sudo systemctl restart systemd-resolved
