@@ -306,8 +306,46 @@ class SystemInterface:
                     json.dump({"aur_helper": self.aur_helper}, f)
                 
                 if not shutil.which(self.aur_helper):
-                    print(f"Installing {self.aur_helper}...")
-                    self._run_command(["sudo", "pacman", "-S", "--needed", self.aur_helper])
+                    print(f"Bootstrap installing {self.aur_helper}...")
+                    self._bootstrap_aur_helper(self.aur_helper)
+    
+    def _bootstrap_aur_helper(self, helper: str):
+        """Bootstrap install the chosen AUR helper"""
+        if helper not in ['paru', 'yay']:
+            raise PacwrapError(f"Unsupported AUR helper: {helper}")
+        
+        try:
+            # Install prerequisites
+            print("Installing prerequisites (base-devel and git)...")
+            self._run_command(["sudo", "pacman", "-S", "--needed", "base-devel", "git"])
+            
+            # Create temp dir
+            temp_dir = Path("/tmp") / f"{helper}-bootstrap"
+            if temp_dir.exists():
+                shutil.rmtree(temp_dir)
+            temp_dir.mkdir(parents=True)
+            
+            # Clone AUR repo
+            repo_url = f"https://aur.archlinux.org/{helper}.git"
+            print(f"Cloning {repo_url}...")
+            self._run_command(["git", "clone", repo_url, str(temp_dir / helper)])
+            
+            # Build and install
+            os.chdir(temp_dir / helper)
+            print(f"Building and installing {helper}...")
+            self._run_command(["makepkg", "-si"], capture_output=False)
+            
+            # Cleanup
+            os.chdir("/")
+            shutil.rmtree(temp_dir)
+            
+            if not shutil.which(helper):
+                raise PacwrapError(f"Failed to install {helper}")
+            
+            self.logger.info("bootstrap", f"Successfully bootstrapped {helper}")
+        except Exception as e:
+            self.logger.error("bootstrap", f"Failed to bootstrap {helper}: {e}")
+            raise PacwrapError(f"Failed to bootstrap AUR helper: {e}")
     
     def _run_command(self, cmd: List[str], capture_output: bool = False, check: bool = True) -> subprocess.CompletedProcess:
         """Run system command safely"""
