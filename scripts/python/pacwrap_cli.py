@@ -84,22 +84,23 @@ class Spinner:
     
     def _spin(self):
         while self.spinning:
-            if not self.verbose:
-                print(f'\r{self.chars[self.index]} {self.message}', end='', flush=True)
-                self.index = (self.index + 1) % len(self.chars)
+            print(f'\r{self.chars[self.index]} {self.message}', end='', flush=True)
+            self.index = (self.index + 1) % len(self.chars)
             time.sleep(0.1)
     
     def start(self):
-        if not self.verbose:
+        if self.verbose:
+            pass
+        else:
             self.spinning = True
             self.thread = threading.Thread(target=self._spin)
             self.thread.start()
     
     def stop(self):
+        self.spinning = False
+        if self.thread:
+            self.thread.join()
         if not self.verbose:
-            self.spinning = False
-            if self.thread:
-                self.thread.join()
             print('\r' + ' ' * (len(self.message) + 2) + '\r', end='')
 
 class Database:

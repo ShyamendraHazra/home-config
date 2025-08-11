@@ -1,0 +1,2 @@
+Add a report feature where the group names and pkg names are listed with repo info to snc efficiently
+the sync feature should by default use report feature under the hood
