@@ -1,0 +1,3 @@
+[submodule "scripts/ipwebcam"]
+	path = scripts/ipwebcam
+	url = https://github.com/agarciadom/ipwebcam-gst.git
