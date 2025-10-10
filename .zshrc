@@ -109,6 +109,8 @@ source $ZSH/oh-my-zsh.sh
 # Custom Defined aliases
 
     alias SSH-TERMUX="sshfs termux:/data/data/com.termux/files/home /datadrive/Shyamendra\ Hazra/Workspace/personal/workdir-android"
+#overriding aliases
+    alias ls="lsd"
 
 #ls aliases
     alias l="ls"
@@ -169,8 +171,9 @@ source $ZSH/oh-my-zsh.sh
 
 	export EDITOR='/usr/bin/nvim'
 	export VISUAL='/usr/bin/nvim'
-
-fash
+	export MANPAGER="nvimpager"
+	export BB_KEY="$(bat /home/$USER/softlinks/Archives/bitbucket/oauth/bb-cli_oauth.json | jq .\"key\")"
+	export BB_SECRET="$(bat /home/$USER/softlinks/Archives/bitbucket/oauth/bb-cli_oauth.json | jq .\"secret\")"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -197,3 +200,7 @@ export NVM_DIR="$HOME/.nvm"
 
 nvm use stable >> /dev/null
 
+
+fash
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
